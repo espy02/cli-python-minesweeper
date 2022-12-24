@@ -113,13 +113,14 @@ def game(rows, columns, mines):
                 except ValueError:
                     rowChosen = 0
                     columnChosen = 0
-                    
-                if rowsNcolumns[rowChosen - 1][columnChosen - 1] == "?" and flags > 0:
-                    rowsNcolumns[rowChosen - 1][columnChosen - 1] = "F"
-                    flags -= 1
-                elif rowsNcolumns[rowChosen - 1][columnChosen - 1] == "F" and flags < minesNumber:
-                    rowsNcolumns[rowChosen - 1][columnChosen - 1] = "?"
-                    flags += 1
+
+                if rowChosen > 0 and rowChosen <= rows and columnChosen > 0 and columnChosen <= columns:
+                    if rowsNcolumns[rowChosen - 1][columnChosen - 1] == "?" and flags > 0:
+                        rowsNcolumns[rowChosen - 1][columnChosen - 1] = "F"
+                        flags -= 1
+                    elif rowsNcolumns[rowChosen - 1][columnChosen - 1] == "F" and flags < minesNumber:
+                        rowsNcolumns[rowChosen - 1][columnChosen - 1] = "?"
+                        flags += 1
 
             case _:
                 pass
