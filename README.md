@@ -1,7 +1,7 @@
 # python-minesweeper
-Python Minesweeper is a simple Minesweeper clone that can be played straight through a terminal.
+Python Minesweeper is a simple Minesweeper clone that can be played straight through the terminal.
 
-## How to use
+## Usage
 Simply change your directory inside the terminal to a folder with the following files:
 
 - `start.py`
@@ -9,3 +9,5 @@ Simply change your directory inside the terminal to a folder with the following 
 - `functions.py`
 
 and execute the program with the command `python start.py`
+
+![pic01](https://i.imgur.com/XBxOh63.png)
