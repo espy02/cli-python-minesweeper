@@ -4,6 +4,7 @@ playing = True
 
 while playing:
 
+    print("Python Minesweeper by espy02.\nhttps://github.com/espy02/python-minesweeper\n")
     print("Select the difficulty:\n\n1. Beginner - 10x10 / 10 mines\n2. Intermediate - 16x16 / 40 mines\n3. Expert - 30x16 / 99 mines\n4. Custom\n")
     diff = input("Difficulty (1/2/3/4): ")
 
