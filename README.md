@@ -1,2 +1,2 @@
 # python-minesweeper
-Minesweeper made using Python
+Python Minesweeper is a simple Minesweeper clone that can be played straight through a terminal.
