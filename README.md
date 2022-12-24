@@ -18,4 +18,4 @@ You will be prompted to choose a difficulty. The default difficulties are `Begin
 
 You can now begin playing. You can choose to "click" on a cell, or to place a flag in a cell. You win when you "click" on every single cell that does not have a bomb. You lose if you "click" on any cell with a bomb. 
 
-![img03](https://i.imgur.com/61xX7Fk.png)
+![img03](https://i.imgur.com/VLt7Zlg.png)
