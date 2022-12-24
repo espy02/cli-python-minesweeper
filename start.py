@@ -3,6 +3,7 @@ from game import game
 playing = True
 
 while playing:
+    restart = ""
 
     print("Python Minesweeper by espy02.\nhttps://github.com/espy02/python-minesweeper\n")
     print("Select the difficulty:\n\n1. Beginner - 10x10 / 10 mines\n2. Intermediate - 16x16 / 40 mines\n3. Expert - 30x16 / 99 mines\n4. Custom\n")
@@ -14,21 +15,48 @@ while playing:
             columns = 10
             mines = 10
             game(rows, columns, mines)
-            playing = False
+            
+            while restart != "y" and restart != "n":
+                restart = input("Do you want to restart? (y/n): ")
+                match restart:
+                    case "y":
+                        pass
+                    case "n":
+                        playing = False
+                    case _:
+                        pass
 
         case "2":
             rows = 16
             columns = 16
             mines = 40
             game(rows, columns, mines)
-            playing = False
+
+            while restart != "y" and restart != "n":
+                restart = input("Do you want to restart? (y/n): ")
+                match restart:
+                    case "y":
+                        pass
+                    case "n":
+                        playing = False
+                    case _:
+                        pass
 
         case "3":
             rows = 30
             columns = 16
             mines = 99
             game(rows, columns, mines)
-            playing = False
+
+            while restart != "y" and restart != "n":
+                restart = input("Do you want to restart? (y/n): ")
+                match restart:
+                    case "y":
+                        pass
+                    case "n":
+                        playing = False
+                    case _:
+                        pass
 
         case "4":
             rows = int(input("Rows: "))
@@ -37,7 +65,15 @@ while playing:
 
             if mines <= (rows * columns):
                 game(rows, columns, mines)
-                playing = False
+                while restart != "y" and restart != "n":
+                    restart = input("Do you want to restart? (y/n): ")
+                    match restart:
+                        case "y":
+                            pass
+                        case "n":
+                            playing = False
+                        case _:
+                            pass
             else:
                 print("Too many bombs!\n")
         case _:
