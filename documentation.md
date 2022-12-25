@@ -16,4 +16,44 @@ WIP
 
 # Coomprehensive explanation
 
-`playing` is assigned with `True`, to allow the program to keep running, even if the user enters an unnessary value to either `restart` or `diff`. Once the program starts, the user can choose one of four values to assign to `diff`. The first three options will assign their respective default values to `rows`, `columns` and `mines`, while the fourth option will allow the user to choose how many rows, columns and mines they want in the game. If this option is selected, neither `rows` or `columns` can be assigned with `0`, and the number of bombs can't exceed the number of cells. When they finish a game, the user can choose if they want to restart, by entering `"y"` or `"n"` to `restart`.
+`playing` is assigned with `True`, to allow the program to keep running, even if the user enters an unnessary value to either `restart` or `diff`. Once the program starts, the user can choose one of four values to assign to `diff`. The first three options will assign their respective default values to `rows`, `columns` and `mines`, while the fourth option will allow the user to choose how many rows, columns and mines they want in the game. If this option is selected, neither `rows` or `columns` can be assigned with `0`, and the number of bombs can't exceed the number of cells. The program will then call the function `minesweeper` from `game.py` with the number of rows, columns and mines chosen. When they finish a game, the user can choose if they want to restart, by entering `"y"` or `"n"` to `restart`. If `"n"` is selected, `playing` will be assigned with `False` and the program will stop running.
+
+# game.py
+##Variables
+`rows` - 
+
+`columns` - 
+
+`mines` - 
+
+`minesCells` - 
+
+`minesNumber` - 
+
+`duplicateCheck` - 
+
+`rowsNcolumns` - 
+
+`points` - 
+
+`flags` - 
+
+`moves` - 
+
+`cellsChecked` - 
+
+`lastPlay` - 
+
+`playing` - 
+
+`choice` - 
+
+`rowChosen` - 
+
+`columnChosen` - 
+
+`minesAround` - 
+
+`playedCellMinesAround` - 
+
+`checkCellsAround` - 
