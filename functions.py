@@ -29,17 +29,17 @@ def showCells(rowsNcolumns, columns):
         print("")
     print("")
 
-def checkMinesAround(rowLeft, rowRight, columnLeft, columnRight, mines, minesAround):
+def checkMinesAround(rowLeft, rowRight, columnLeft, columnRight, minesCells, minesAround):
 
     for i in range(rowLeft, rowRight):
         for j in range(columnLeft, columnRight):
-            if [i, j] in mines.values():
+            if [i, j] in minesCells:
                 minesAround += 1
                 
     return minesAround
 
-def showMines(mines, rows):
-    for i in mines.values():
+def showMines(minesCells, rows):
+    for i in minesCells:
         rows[i[0] - 1][i[1] - 1] = "M"
 
 def checkMinesAroundPreamble(rowChosen, columnChosen, rows, columns, minesCells):
@@ -67,3 +67,12 @@ def checkMinesAroundPreamble(rowChosen, columnChosen, rows, columns, minesCells)
         minesAround = checkMinesAround(rowChosen - 1, rowChosen + 1, columnChosen - 1, columnChosen + 1, minesCells, minesAround)
 
     return minesAround
+
+def checkMoves(points, flags, moves, lastPlay):
+    if lastPlay[0] != points or lastPlay[1] != flags:
+        lastPlay.extend([points, flags])
+        lastPlay.pop(0)
+        lastPlay.pop(0)
+        return moves + 1
+    else:
+        return moves

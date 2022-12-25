@@ -36,7 +36,7 @@ def minesweeper(rows, columns, mines):
     playing = True
 
     while playing:
-        print("\nPoints:", points, "/", (rows * columns) - mines, "\nFlags:", flags, "\nMoves:", moves)
+        print("\n\nPoints:", points, "/", (rows * columns) - mines, "\nFlags:", flags, "\nMoves:", moves)
         showCells(rowsNcolumns, columns)
         print("1. Cell\n2. Flag\n")
         choice = input("Select (1/2): ")
@@ -53,59 +53,53 @@ def minesweeper(rows, columns, mines):
                 if [rowChosen, columnChosen] in minesCells and rowsNcolumns[rowChosen - 1][columnChosen - 1] != "F":
                     playing = False
                     showMines(minesCells, rowsNcolumns)
-                    #checkMoves()
+                    moves = checkMoves(points, flags, moves, lastPlay)
                     print("\nPoints:", points, "/", (rows * columns) - mines, "\nFlags:", flags, "\nMoves:", moves)
                     showCells(rowsNcolumns, columns)
                     print("You lost!")
 
                 elif rowChosen > 0 and rowChosen <= rows and columnChosen > 0 and columnChosen <= columns \
-                and rowsNcolumns[rowChosen - 1][columnChosen - 1] != "F":
-                    
+                and rowsNcolumns[rowChosen - 1][columnChosen - 1] != "F" and [rowChosen - 1, columnChosen - 1] not in cellsChecked:
                     minesAround = checkMinesAroundPreamble(rowChosen, columnChosen, rows, columns, minesCells)
-
                     rowsNcolumns[rowChosen - 1][columnChosen - 1] = minesAround
+                    playedCellMinesAround = minesAround
+                    cellsChecked.append([rowChosen - 1, columnChosen - 1])
+                    points += 1
 
-                    playedCellMinesNumber = minesAround
+                    cellsAround = [[rowChosen - 1, columnChosen], [rowChosen, columnChosen - 1], [rowChosen, columnChosen + 1], \
+                    [rowChosen + 1, columnChosen]]
 
-                    if [rowChosen - 1, columnChosen - 1] not in cellsChecked:
-                        cellsChecked.append([rowChosen - 1, columnChosen - 1])
-                        points += 1
+                    for i in range(3):
+                        checkCellsAround = 0
+                        while checkCellsAround != 3:
+                            if checkCellsAround < len(cellsAround):
+                                if cellsAround[checkCellsAround][0] <= 0 or cellsAround[checkCellsAround][0] > rows \
+                                or cellsAround[checkCellsAround][1] <= 0 or cellsAround[checkCellsAround][1] > columns:
+                                    cellsAround.remove([cellsAround[checkCellsAround][0], cellsAround[checkCellsAround][1]])
+                            checkCellsAround += 1
 
-                        cellsAround = [[rowChosen - 1, columnChosen], [rowChosen, columnChosen - 1], [rowChosen, columnChosen + 1], \
-                        [rowChosen + 1, columnChosen]]
+                    while len(cellsAround) != 0:
+                        if cellsAround[0][0] > 0 and cellsAround[0][0] <= rows \
+                        and cellsAround[0][1] > 0 and cellsAround[0][1] <= columns \
+                        and [cellsAround[0][0] - 1, cellsAround[0][1] - 1] not in cellsChecked \
+                        and [cellsAround[0][0], cellsAround[0][1]] not in minesCells \
+                        and rowsNcolumns[cellsAround[0][0] - 1][cellsAround[0][1] - 1] != "F":
+                            if checkMinesAroundPreamble(cellsAround[0][0], cellsAround[0][1], rows, columns, minesCells) \
+                            == playedCellMinesAround:
+                                rowsNcolumns[cellsAround[0][0] - 1][cellsAround[0][1] - 1] = playedCellMinesAround
+                                cellsChecked.append([cellsAround[0][0] - 1, cellsAround[0][1] - 1])
+                                points += 1
+                                cellsAround.extend([[cellsAround[0][0] - 1, cellsAround[0][1]],  [cellsAround[0][0], cellsAround[0][1] - 1], \
+                                [cellsAround[0][0], cellsAround[0][1] + 1], [cellsAround[0][0] + 1, cellsAround[0][1]]])
+                        cellsAround.pop(0)
 
-
-                        for i in range(len(cellsAround)):
-                            checkCellsAround = 0
-                            while checkCellsAround != 7:
-                                if checkCellsAround < len(cellsAround):
-                                    if cellsAround[checkCellsAround][0] <= 0 or cellsAround[checkCellsAround][0] > rows \
-                                    or cellsAround[checkCellsAround][1] <= 0 or cellsAround[checkCellsAround][1] > columns:
-                                        cellsAround.remove([cellsAround[checkCellsAround][0], cellsAround[checkCellsAround][1]])
-                                checkCellsAround += 1
-
-                        while len(cellsAround) != 0:
-                            if cellsAround[0][0] > 0 and cellsAround[0][0] <= rows \
-                            and cellsAround[0][1] > 0 and cellsAround[0][1] <= columns \
-                            and [cellsAround[0][0] - 1, cellsAround[0][1] - 1] not in cellsChecked \
-                            and [cellsAround[0][0], cellsAround[0][1]] not in minesCells \
-                            and rowsNcolumns[cellsAround[0][0] - 1][cellsAround[0][1] - 1] != "F":
-                                if checkMinesAroundPreamble(cellsAround[0][0], cellsAround[0][1], rows, columns, minesCells) \
-                                    == playedCellMinesNumber:
-                                    rowsNcolumns[cellsAround[0][0] - 1][cellsAround[0][1] - 1] = playedCellMinesNumber
-                                    cellsChecked.append([cellsAround[0][0] - 1, cellsAround[0][1] - 1])
-                                    points += 1
-                                    cellsAround.extend([[cellsAround[0][0] - 1, cellsAround[0][1]],  [cellsAround[0][0], cellsAround[0][1] - 1], \
-                                    [cellsAround[0][0], cellsAround[0][1] + 1], [cellsAround[0][0] + 1, cellsAround[0][1]]])
-                            cellsAround.pop(0)
-
-                    if points == (rows * columns) - mines:
-                        playing = False
-                        showMines(minesCells, rowsNcolumns)
-                        #checkMoves()
-                        print("\nPoints:", points, "/", (rows * columns) - mines, "\nFlags:", flags, "\nMoves:", moves)
-                        showCells(rowsNcolumns, columns)
-                        print("You win!")
+                if points == (rows * columns) - mines:
+                    playing = False
+                    showMines(minesCells, rowsNcolumns)
+                    moves = checkMoves(points, flags, moves, lastPlay)
+                    print("\nPoints:", points, "/", (rows * columns) - mines, "\nFlags:", flags, "\nMoves:", moves)
+                    showCells(rowsNcolumns, columns)
+                    print("You win!")
 
             case "2":
                 try:
@@ -125,3 +119,5 @@ def minesweeper(rows, columns, mines):
 
             case _:
                 pass
+        
+        moves = checkMoves(points, flags, moves, lastPlay)
