@@ -1,4 +1,4 @@
-from game import game
+from game import minesweeper
 
 playing = True
 
@@ -14,67 +14,44 @@ while playing:
             rows = 10
             columns = 10
             mines = 10
-            game(rows, columns, mines)
-            
-            while restart != "y" and restart != "n":
-                restart = input("Do you want to restart? (y/n): ")
-                match restart:
-                    case "y":
-                        pass
-                    case "n":
-                        playing = False
-                    case _:
-                        pass
+            minesweeper(rows, columns, mines)
 
         case "2":
             rows = 16
             columns = 16
             mines = 40
-            game(rows, columns, mines)
-
-            while restart != "y" and restart != "n":
-                restart = input("Do you want to restart? (y/n): ")
-                match restart:
-                    case "y":
-                        pass
-                    case "n":
-                        playing = False
-                    case _:
-                        pass
+            minesweeper(rows, columns, mines)
 
         case "3":
             rows = 30
             columns = 16
             mines = 99
-            game(rows, columns, mines)
-
-            while restart != "y" and restart != "n":
-                restart = input("Do you want to restart? (y/n): ")
-                match restart:
-                    case "y":
-                        pass
-                    case "n":
-                        playing = False
-                    case _:
-                        pass
+            minesweeper(rows, columns, mines)
 
         case "4":
             rows = int(input("Rows: "))
             columns = int(input("Columns: "))
             mines = int(input("Mines: "))
 
-            if mines <= (rows * columns):
-                game(rows, columns, mines)
-                while restart != "y" and restart != "n":
-                    restart = input("Do you want to restart? (y/n): ")
-                    match restart:
-                        case "y":
-                            pass
-                        case "n":
-                            playing = False
-                        case _:
-                            pass
+            if rows == 0 or columns == 0:
+                print("\nNot enough rows/columns!\n")
+                restart = "y"
+
+            elif mines > (rows * columns):
+                print("\nToo many bombs!\n")
+                restart = "y"
+
             else:
-                print("Too many bombs!\n")
+                minesweeper(rows, columns, mines)
+
         case _:
             print("")
+            restart = "y"
+
+    while restart != "y" and restart != "n":
+        restart = input("Do you want to restart? (y/n): ")
+        match restart:
+            case "n":
+                playing = False
+            case _:
+                pass
