@@ -22,8 +22,8 @@ You can now begin playing. You can select a cell, or place a flag on a cell.
 - Once you select a cell that does not have a mine, all cells near the chosen cell that have the same number of mines around them will also be automatically selected.
 - You win when you select every cell that does not have a mine, and you lose if you select any cell with a mine.
 
-![img03](https://i.imgur.com/VLt7Zlg.png)
+![img03](https://i.imgur.com/KwBW2PD.png)
 
 This program was made to avoid any sort of bug/crash, but if you find any, please let me know.
 
-![img04](https://i.imgur.com/dY7lww8.png)
+![gif](https://i.ibb.co/LSgBw5j/gif.gif)
