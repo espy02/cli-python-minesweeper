@@ -30,7 +30,6 @@ def showCells(rowsNcolumns, columns):
     print("")
 
 def checkMinesAround(rowLeft, rowRight, columnLeft, columnRight, minesCells, minesAround):
-
     for i in range(rowLeft, rowRight):
         for j in range(columnLeft, columnRight):
             if [i, j] in minesCells:
