@@ -16,7 +16,7 @@ You will be prompted to choose a difficulty. The default difficulties are `Begin
 
 ![img02](https://i.imgur.com/ewbZGZS.png)
 
-You can now begin playing. You can choose to "click" on a cell, or to place a flag on a cell. You win when you "click" on every cell that does not have a mine, and you lose if you "click" on any cell with a mine. 
+You can now begin playing. You can select a cell, or to place a flag on a cell. You win when you select every cell that does not have a mine, and you lose if you select any cell with a mine.
 
 ![img03](https://i.imgur.com/VLt7Zlg.png)
 
