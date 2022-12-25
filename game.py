@@ -1,12 +1,12 @@
 from random import randint
 from functions import *
 
-def game(rows, columns, mines):
-    minesCells = {}
+def minesweeper(rows, columns, mines):
+    minesCells = []
     minesNumber = 0
 
     while minesNumber < mines:
-        minesCells[minesNumber] = [randint(1, rows), randint(1, columns)]
+        minesCells.append([randint(1, rows), randint(1, columns)])
         duplicateCheck = True
     
         if len(minesCells) > 1:
@@ -30,17 +30,18 @@ def game(rows, columns, mines):
 
     points = 0
     flags = minesNumber
+    moves = 0
     cellsChecked = []
+    lastPlay = [points, flags]
     playing = True
 
     while playing:
-        print("\nPoints:", points, "/", (rows * columns) - mines, "\nFlags:", flags)
+        print("\nPoints:", points, "/", (rows * columns) - mines, "\nFlags:", flags, "\nMoves:", moves)
         showCells(rowsNcolumns, columns)
         print("1. Cell\n2. Flag\n")
         choice = input("Select (1/2): ")
 
         match choice:
-
             case "1":
                 try:
                     rowChosen = int(input("Row: "))
@@ -49,10 +50,11 @@ def game(rows, columns, mines):
                     rowChosen = 0
                     columnChosen = 0
 
-                if [rowChosen, columnChosen] in minesCells.values() and rowsNcolumns[rowChosen - 1][columnChosen - 1] != "F":
+                if [rowChosen, columnChosen] in minesCells and rowsNcolumns[rowChosen - 1][columnChosen - 1] != "F":
                     playing = False
                     showMines(minesCells, rowsNcolumns)
-                    print("\nPoints:", points, "/", (rows * columns) - mines, "\nFlags:", flags)
+                    #checkMoves()
+                    print("\nPoints:", points, "/", (rows * columns) - mines, "\nFlags:", flags, "\nMoves:", moves)
                     showCells(rowsNcolumns, columns)
                     print("You lost!")
 
@@ -69,9 +71,8 @@ def game(rows, columns, mines):
                         cellsChecked.append([rowChosen - 1, columnChosen - 1])
                         points += 1
 
-                        cellsAround = [[rowChosen - 1, columnChosen - 1], [rowChosen - 1, columnChosen], [rowChosen - 1, columnChosen + 1], \
-                        [rowChosen, columnChosen - 1], [rowChosen, columnChosen + 1], \
-                        [rowChosen + 1, columnChosen - 1], [rowChosen + 1, columnChosen], [rowChosen + 1, columnChosen + 1]]
+                        cellsAround = [[rowChosen - 1, columnChosen], [rowChosen, columnChosen - 1], [rowChosen, columnChosen + 1], \
+                        [rowChosen + 1, columnChosen]]
 
 
                         for i in range(len(cellsAround)):
@@ -87,22 +88,22 @@ def game(rows, columns, mines):
                             if cellsAround[0][0] > 0 and cellsAround[0][0] <= rows \
                             and cellsAround[0][1] > 0 and cellsAround[0][1] <= columns \
                             and [cellsAround[0][0] - 1, cellsAround[0][1] - 1] not in cellsChecked \
-                            and [cellsAround[0][0], cellsAround[0][1]] not in minesCells.values() \
+                            and [cellsAround[0][0], cellsAround[0][1]] not in minesCells \
                             and rowsNcolumns[cellsAround[0][0] - 1][cellsAround[0][1] - 1] != "F":
                                 if checkMinesAroundPreamble(cellsAround[0][0], cellsAround[0][1], rows, columns, minesCells) \
                                     == playedCellMinesNumber:
                                     rowsNcolumns[cellsAround[0][0] - 1][cellsAround[0][1] - 1] = playedCellMinesNumber
                                     cellsChecked.append([cellsAround[0][0] - 1, cellsAround[0][1] - 1])
                                     points += 1
-                                    cellsAround.extend([[cellsAround[0][0] - 1, cellsAround[0][1] - 1], [cellsAround[0][0] - 1, cellsAround[0][1]], [cellsAround[0][0] - 1, cellsAround[0][1] + 1], \
-                                    [cellsAround[0][0], cellsAround[0][1] - 1], [cellsAround[0][0], cellsAround[0][1] + 1], \
-                                    [cellsAround[0][0] + 1, cellsAround[0][1] - 1], [cellsAround[0][0] + 1, cellsAround[0][1]], [cellsAround[0][0] + 1, cellsAround[0][1] + 1]])
+                                    cellsAround.extend([[cellsAround[0][0] - 1, cellsAround[0][1]],  [cellsAround[0][0], cellsAround[0][1] - 1], \
+                                    [cellsAround[0][0], cellsAround[0][1] + 1], [cellsAround[0][0] + 1, cellsAround[0][1]]])
                             cellsAround.pop(0)
 
                     if points == (rows * columns) - mines:
                         playing = False
                         showMines(minesCells, rowsNcolumns)
-                        print("\nPoints:", points, "/", (rows * columns) - mines, "\nFlags:", flags)
+                        #checkMoves()
+                        print("\nPoints:", points, "/", (rows * columns) - mines, "\nFlags:", flags, "\nMoves:", moves)
                         showCells(rowsNcolumns, columns)
                         print("You win!")
 

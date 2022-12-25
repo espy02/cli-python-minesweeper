@@ -29,23 +29,27 @@ while playing:
             minesweeper(rows, columns, mines)
 
         case "4":
-            rows = int(input("Rows: "))
-            columns = int(input("Columns: "))
-            mines = int(input("Mines: "))
+            try:
+                rows = int(input("Rows: "))
+                columns = int(input("Columns: "))
+                mines = int(input("Mines: "))
+            except ValueError:
+                rows = 0
+                columns = 0
+                mines = 0
 
             if rows == 0 or columns == 0:
-                print("\nNot enough rows/columns!\n")
+                print("\nNot enough rows/columns!")
                 restart = "y"
 
             elif mines > (rows * columns):
-                print("\nToo many bombs!\n")
+                print("\nToo many bombs!")
                 restart = "y"
 
             else:
                 minesweeper(rows, columns, mines)
 
         case _:
-            print("")
             restart = "y"
 
     while restart != "y" and restart != "n":
