@@ -26,4 +26,4 @@ You can now begin playing. You can select a cell, or place a flag on a cell.
 
 This program was made to avoid any sort of bug/crash, but if you find any, please let me know.
 
-![gif](https://i.imgur.com/xSJPGM2.mp4)
+![gif](https://i.ibb.co/LSgBw5j/gif.gif)
