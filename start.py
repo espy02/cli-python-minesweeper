@@ -7,26 +7,17 @@ while playing:
 
     print("\nPython Minesweeper by espy02.\nhttps://github.com/espy02/python-minesweeper\n")
     print("Select the difficulty:\n\n1. Beginner - 10x10 / 10 mines\n2. Intermediate - 16x16 / 40 mines\n3. Expert - 30x16 / 99 mines\n4. Custom\n")
-    diff = input("Difficulty (1/2/3/4): ")
+    difficulty = input("Difficulty (1/2/3/4): ")
 
-    match diff:
+    match difficulty:
         case "1":
-            rows = 10
-            columns = 10
-            mines = 10
-            minesweeper(rows, columns, mines)
+            minesweeper(rows = 10, columns = 10, mines = 10)
 
         case "2":
-            rows = 16
-            columns = 16
-            mines = 40
-            minesweeper(rows, columns, mines)
+            minesweeper(rows = 16, columns = 16, mines = 40)
 
         case "3":
-            rows = 30
-            columns = 16
-            mines = 99
-            minesweeper(rows, columns, mines)
+            minesweeper(rows = 30, columns = 16, mines = 99)
 
         case "4":
             try:
