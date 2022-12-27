@@ -110,7 +110,7 @@ def checkMoves(points, flags, moves, lastPlay):
 
 def showMines(cellsWithMines, cells):
     '''
-    This function will change the cells in the cells dictionary that contain a mine to the character "M".
+    This function will change every cell with a mine in the cells dictionary to the character "M".
     This function is called when the user loses the game or wins the game.
     '''
     for i in cellsWithMines:
