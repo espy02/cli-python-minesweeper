@@ -9,9 +9,9 @@ def minesweeper(rows, columns, mines):
     totalPoints = (rows * columns) - mines
     flags = mines
     moves = 0
+    lastPlay = [points, flags]
 
     cellsSelected = []
-    lastPlay = [points, flags]
     playing = True
 
     while playing:
@@ -21,7 +21,7 @@ def minesweeper(rows, columns, mines):
 
         match choice:
             case "1":
-                cellChosen = input("Select cell (row, column): ")
+                cellChosen = input("Select cell: ")
                 try:
                     rowChosen = int(cellChosen.split(",")[0].strip())
                     columnChosen = int(cellChosen.split(",")[1].strip())
@@ -54,7 +54,7 @@ def minesweeper(rows, columns, mines):
                     print("You win!")
 
             case "2":
-                cellChosen = input("Select cell (row, column): ")
+                cellChosen = input("Select cell: ")
                 try:
                     rowChosen = int(cellChosen.split(",")[0].strip())
                     columnChosen = int(cellChosen.split(",")[1].strip())
@@ -62,13 +62,7 @@ def minesweeper(rows, columns, mines):
                     rowChosen = 0
                     columnChosen = 0
 
-                if rowChosen > 0 and rowChosen <= rows and columnChosen > 0 and columnChosen <= columns:
-                    if cells[rowChosen][columnChosen] == "?" and flags > 0:
-                        cells[rowChosen][columnChosen] = "F"
-                        flags -= 1
-                    elif cells[rowChosen][columnChosen] == "F" and flags < mines:
-                        cells[rowChosen][columnChosen] = "?"
-                        flags += 1
+                flags = addFlag(rowChosen, rows, columnChosen, columns, cells, flags, mines)
 
             case _:
                 pass
