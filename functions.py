@@ -157,8 +157,6 @@ def checkCellsAround(rowChosen, columnChosen, rows, columns, cellsSelected, cell
     '''
     This function will check if the cell above, below, to the right, and to the left of the selected cell has the same number of mines around it.
     Those cells will be added to cellsAround.
-    The cells that have a 0 on its coordinates, or have a coordinate that is greater than the respective number of rows or number of columns,
-    will be removed from the list.
     The cells that have the same number of mines around as the selected cell will be automatically selected and added to cellsSelected.
     Then, just like the original selected cell, the cell above, below, to the right, and to the left of a cell added to cellsSelected,
     will also be added to cellsAround.
