@@ -118,7 +118,10 @@ def showMines(cellsWithMines, cells):
 
 def checkMinesAround(rowChosen, columnChosen, rows, columns, cellsWithMines):
     '''
-    
+    This function will check how many mines are around the selected mine.
+    The six if statements are used if, for example, the selected cell is [1,1].
+    The cells [0,0], [0,1], [0,2], [1,0], [2,0] can't be checked, because those cells don't exist.
+    This function return the number of mines around the selected mine.
     '''
     minesAround = 0
     rowLeft = rowChosen - 1
@@ -164,6 +167,8 @@ def checkCellsAround(rowChosen, columnChosen, rows, columns, cellsSelected, cell
     If the cell is in cellsSelected, or is a cell with a mine, or is a cell with a flag, or has a 0 on its coordinates,
     or has a coordinate that is greater than the respective number of rows or number of columns, 
     then it will not be verified and it will be removed from cellsAround.
+    Points will also be given if a cell is added to cellsSelected.
+    This function will return the number of points.
     '''
     cellsAround = [[rowChosen - 1, columnChosen], [rowChosen, columnChosen - 1], [rowChosen, columnChosen + 1], \
     [rowChosen + 1, columnChosen]]
@@ -181,3 +186,21 @@ def checkCellsAround(rowChosen, columnChosen, rows, columns, cellsSelected, cell
         cellsAround.pop(0)
 
     return points
+
+def addFlag(rowChosen, rows, columnChosen, columns, cells, flags, mines):
+    '''
+    This function will change the selected cell in the cells dictionary to the character "F", if it's not a flag, and the number of flags is not 0.
+    Alternatively, it will change the selected cell in the cells dictionary to the character "?", if it's a flag,
+    and the number of flags is lesser than the number of mines.
+    Cells can only be changed into a flag if the cell is within the limits of the rows and columns set by the user in start.py
+    This function will return the number of flags.
+    '''
+    if rowChosen > 0 and rowChosen <= rows and columnChosen > 0 and columnChosen <= columns:
+        if cells[rowChosen][columnChosen] == "?" and flags != 0:
+            cells[rowChosen][columnChosen] = "F"
+            flags -= 1
+        elif cells[rowChosen][columnChosen] == "F" and flags < mines:
+            cells[rowChosen][columnChosen] = "?"
+            flags += 1
+
+    return flags
