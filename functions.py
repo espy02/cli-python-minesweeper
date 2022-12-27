@@ -160,11 +160,10 @@ def checkCellsAround(rowChosen, columnChosen, rows, columns, cellsSelected, cell
     The cells that have the same number of mines around as the selected cell will be automatically selected and added to cellsSelected.
     Then, just like the original selected cell, the cell above, below, to the right, and to the left of a cell added to cellsSelected,
     will also be added to cellsAround.
-    Once a cell is verified, it will be removed from cellsAround*.
+    Once a cell is verified, it will be removed from cellsAround.
     If the cell is in cellsSelected, or is a cell with a mine, or is a cell with a flag, or has a 0 on its coordinates,
     or has a coordinate that is greater than the respective number of rows or number of columns, 
     then it will not be verified and it will be removed from cellsAround.
-    *(except the original selected cell, since it was never in the list to begin with)
     '''
     cellsAround = [[rowChosen - 1, columnChosen], [rowChosen, columnChosen - 1], [rowChosen, columnChosen + 1], \
     [rowChosen + 1, columnChosen]]
