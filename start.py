@@ -1,4 +1,5 @@
 from game import minesweeper
+from getpass import getpass
 
 playing = True
 
@@ -11,15 +12,15 @@ while playing:
 
     match difficulty:
         case "1":
-            input("\nNote: to select a cell, enter the number of the row, and the number of the column, separated by a comma.\nExample: 4,5\nPress enter to continue.")
+            getpass("\nNote: to select a cell, enter the number of the row, and the number of the column, separated by a comma.\nExample: 4,5\nPress enter to continue.")
             minesweeper(rows = 10, columns = 10, mines = 10)
 
         case "2":
-            input("\nNote: to select a cell, enter the number of the row, and the number of the column, separated by a comma.\nExample: 4,5\nPress enter to continue.")
+            getpass("\nNote: to select a cell, enter the number of the row, and the number of the column, separated by a comma.\nExample: 4,5\nPress enter to continue.")
             minesweeper(rows = 16, columns = 16, mines = 40)
 
         case "3":
-            input("\nNote: to select a cell, enter the number of the row, and the number of the column, separated by a comma.\nExample: 4,5\nPress enter to continue.")
+            getpass("\nNote: to select a cell, enter the number of the row, and the number of the column, separated by a comma.\nExample: 4,5\nPress enter to continue.")
             minesweeper(rows = 30, columns = 16, mines = 99)
 
         case "4":
