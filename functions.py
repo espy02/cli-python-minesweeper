@@ -1,10 +1,10 @@
 def minesCoordinates(rows, columns, mines):
     '''
     This function will assign the coordinates of each mine.
-    The number of rows, columns and mines are integers that have been defined in start.py.
+    The number of rows, columns and mines have been defined in start.py.
     If the length of the list is greater than one, check for any duplicates.
     If duplicate found, remove the one with the greatest index number (which is j).
-    checkForDuplicates is used because if a duplicate is found, only two mines will have the same coordinates.
+    checkForDuplicates is used because, if a duplicate is found, only two mines will have the same coordinates.
     This function will return a list with the coordinates of each mine.
     '''
     from random import randint
@@ -29,9 +29,9 @@ def minesCoordinates(rows, columns, mines):
 def cellsCoordinates(rows, columns):
     '''
     This function will create a dictionary that will contain the coordinates of each cell.
-    The keys of the dictionary are the number of each row, which were assigned in start.py.
-    The values are a list containing the "?" symbol.
-    The number of "?"s is equivalent to the number of columns assigned in start.py.
+    The number of rows and columns have been defined in start.py.
+    The keys of the dictionary are the number of each row, and the values are a list containing the "?" symbol.
+    The number of "?"s is equivalent to the number of columns.
     Since the lists' index number 0 won't be used, it will be assigned with "N/A".
     This function will return said dictionary with the cells' coordinates.
     '''
@@ -51,6 +51,8 @@ def cellsCoordinates(rows, columns):
 def showCells(points, totalPoints, flags, moves, cells, columns):
     '''
     This function will print the cells dictionary, each element in one line.
+    The number of columns have been defined in start.py.
+    points, totalPoints, flags, moves and cells have been defined in game.py.
 
     First, it will print the numbers at the top, the number of each column.
     If there are more than 10 columns, if the column number is lesser or equal than 9, print two blank spaces next to the number.
@@ -93,17 +95,17 @@ def showCells(points, totalPoints, flags, moves, cells, columns):
         print("")
     print("")
 
-def checkMoves(points, flags, moves, lastPlay):
+def checkMoves(points, flags, moves, lastMove):
     '''
     This function will check if the user has made a move.
-    A user has made a move if the number of points or the number of flags has changed since the last play.
-    The lastPlay list contains the number of points and the number of flags of the last play.
+    points, flags, moves and lastMove have been defined in game.py.
+    A user has made a move if the number of points or the number of flags has changed since the last move.
     This function will return the number of moves.
     '''
-    if lastPlay[0] != points or lastPlay[1] != flags:
-        lastPlay.extend([points, flags])
-        lastPlay.pop(0)
-        lastPlay.pop(0)
+    if lastMove[0] != points or lastMove[1] != flags:
+        lastMove.extend([points, flags])
+        lastMove.pop(0)
+        lastMove.pop(0)
         return moves + 1
     else:
         return moves
@@ -111,17 +113,20 @@ def checkMoves(points, flags, moves, lastPlay):
 def showMines(cellsWithMines, cells):
     '''
     This function will change every cell with a mine in the cells dictionary to the character "M".
-    This function is called when the user loses the game or wins the game.
+    cellsWithMines and cells has been defined in game.py.
+    This function is called when the user wins the game or loses the game.
     '''
     for i in cellsWithMines:
         cells[i[0]][i[1]] = "M"
 
 def checkMinesAround(rowChosen, columnChosen, rows, columns, cellsWithMines):
     '''
-    This function will check how many mines are around the selected mine.
+    This function will check how many mines are around the selected cell.
+    The number of rows and columns have been defined in start.py.
+    rowChosen, columnChosen and cellsWithMines have been defined in game.py.
     The six if statements are used if, for example, the selected cell is [1,1].
     The cells [0,0], [0,1], [0,2], [1,0], [2,0] can't be checked, because those cells don't exist.
-    This function return the number of mines around the selected mine.
+    This function return the number of mines around the selected cell.
     '''
     minesAround = 0
     rowLeft = rowChosen - 1
@@ -156,30 +161,32 @@ def checkMinesAround(rowChosen, columnChosen, rows, columns, cellsWithMines):
 
     return minesAround
 
-def checkCellsAround(rowChosen, columnChosen, rows, columns, cellsSelected, cellsWithMines, cells, selectedCellMinesAround, points):
+def checkCellsAround(rowChosen, columnChosen, rows, columns, selectedCells, cellsWithMines, cells, selectedCellMinesAround, points):
     '''
     This function will check if the cell above, below, to the right, and to the left of the selected cell has the same number of mines around it.
     Those cells will be added to cellsAround.
-    The cells that have the same number of mines around as the selected cell will be automatically selected and added to cellsSelected.
-    Then, just like the original selected cell, the cell above, below, to the right, and to the left of a cell added to cellsSelected,
+    The cells that have the same number of mines around as the selected cell will be automatically selected and added to selectedCells.
+    Then, just like the original selected cell, the cell above, below, to the right, and to the left of a cell added to selectedCells,
     will also be added to cellsAround.
     Once a cell is verified, it will be removed from cellsAround.
-    If the cell is in cellsSelected, or is a cell with a mine, or is a cell with a flag, or has a 0 on its coordinates,
-    or has a coordinate that is greater than the respective number of rows or number of columns, 
+    If the cell is in selectedCells, or is a cell with a mine, or is a cell with a flag, or has a 0 on its coordinates,
+    or has a coordinate that is greater than its respective number of rows or number of columns, which have been defined in start.py,
     then it will not be verified and it will be removed from cellsAround.
-    Points will also be given if a cell is added to cellsSelected.
+    Points will also be given if a cell is added to selectedCells.
     This function will return the number of points.
+    The number of rows and columns have been defined in start.py.
+    rowChosen, columnChosen, selectedCells, cellsWithMines, cells, selectedCellMinesAround and points have been defined in game.py.
     '''
     cellsAround = [[rowChosen - 1, columnChosen], [rowChosen, columnChosen - 1], [rowChosen, columnChosen + 1], \
     [rowChosen + 1, columnChosen]]
 
     while len(cellsAround) != 0:
         if cellsAround[0][0] > 0 and cellsAround[0][0] <= rows and cellsAround[0][1] > 0 and cellsAround[0][1] <= columns \
-        and [cellsAround[0][0], cellsAround[0][1]] not in cellsSelected and [cellsAround[0][0], cellsAround[0][1]] not in cellsWithMines \
+        and [cellsAround[0][0], cellsAround[0][1]] not in selectedCells and [cellsAround[0][0], cellsAround[0][1]] not in cellsWithMines \
         and cells[cellsAround[0][0]][cellsAround[0][1] - 1] != "F" \
         and checkMinesAround(cellsAround[0][0], cellsAround[0][1], rows, columns, cellsWithMines) == selectedCellMinesAround:
             cells[cellsAround[0][0]][cellsAround[0][1]] = selectedCellMinesAround
-            cellsSelected.append([cellsAround[0][0], cellsAround[0][1]])
+            selectedCells.append([cellsAround[0][0], cellsAround[0][1]])
             points += 1
             cellsAround.extend([[cellsAround[0][0] - 1, cellsAround[0][1]],  [cellsAround[0][0], cellsAround[0][1] - 1], \
             [cellsAround[0][0], cellsAround[0][1] + 1], [cellsAround[0][0] + 1, cellsAround[0][1]]])
@@ -189,11 +196,14 @@ def checkCellsAround(rowChosen, columnChosen, rows, columns, cellsSelected, cell
 
 def addFlag(rowChosen, rows, columnChosen, columns, cells, flags, mines):
     '''
-    This function will change the selected cell in the cells dictionary to the character "F", if it's not a flag, and the number of flags is not 0.
-    Alternatively, it will change the selected cell in the cells dictionary to the character "?", if it's a flag,
+    This function will change the selected cell in the cells dictionary to the character "F", if the cell is not a flag, 
+    and the number of flags is not 0.
+    Alternatively, it will change the selected cell in the cells dictionary to the character "?", if the cell is a flag,
     and the number of flags is lesser than the number of mines.
     Cells can only be changed into a flag if the cell is within the limits of the rows and columns set by the user in start.py
     This function will return the number of flags.
+    The number of rows, columns and mines have been defined in start.py.
+    rowChosen, columnChosen, cells and flags have been defined in game.py.
     '''
     if rowChosen > 0 and rowChosen <= rows and columnChosen > 0 and columnChosen <= columns:
         if cells[rowChosen][columnChosen] == "?" and flags != 0:
