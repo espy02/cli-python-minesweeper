@@ -1,6 +1,11 @@
 from functions import *
 
 def minesweeper(rows, columns, mines):
+    '''
+    The main function of the program.
+    It will keep looping until the user either wins the game or loses the game.
+    Check functions.py for a detailed explanation of each function.
+    '''
     cellsWithMines = minesCoordinates(rows, columns, mines)
     
     cells = cellsCoordinates(rows, columns)
@@ -9,9 +14,9 @@ def minesweeper(rows, columns, mines):
     totalPoints = (rows * columns) - mines
     flags = mines
     moves = 0
-    lastPlay = [points, flags]
+    lastMove = [points, flags]
 
-    cellsSelected = []
+    selectedCells = []
     playing = True
 
     while playing:
@@ -31,24 +36,24 @@ def minesweeper(rows, columns, mines):
 
                 if [rowChosen, columnChosen] in cellsWithMines and cells[rowChosen][columnChosen] != "F":
                     playing = False
-                    moves = checkMoves(points, flags, moves, lastPlay)
+                    moves += 1
                     showMines(cellsWithMines, cells)
                     showCells(points, totalPoints, flags, moves, cells, columns)
                     print("You lost!")
 
                 elif rowChosen > 0 and rowChosen <= rows and columnChosen > 0 and columnChosen <= columns \
-                and cells[rowChosen][columnChosen] != "F" and [rowChosen, columnChosen] not in cellsSelected:
+                and cells[rowChosen][columnChosen] != "F" and [rowChosen, columnChosen] not in selectedCells:
 
                     selectedCellMinesAround = checkMinesAround(rowChosen, columnChosen, rows, columns, cellsWithMines)
                     cells[rowChosen][columnChosen] = selectedCellMinesAround
-                    cellsSelected.append([rowChosen, columnChosen])
+                    selectedCells.append([rowChosen, columnChosen])
                     points += 1
 
-                    points = checkCellsAround(rowChosen, columnChosen, rows, columns, cellsSelected, cellsWithMines, cells, selectedCellMinesAround, points)
+                    points = checkCellsAround(rowChosen, columnChosen, rows, columns, selectedCells, cellsWithMines, cells, selectedCellMinesAround, points)
 
                 if points == totalPoints:
                     playing = False
-                    moves = checkMoves(points, flags, moves, lastPlay)
+                    moves += 1
                     showMines(cellsWithMines, cells)
                     showCells(points, totalPoints, flags, moves, cells, columns)
                     print("You win!")
@@ -67,4 +72,4 @@ def minesweeper(rows, columns, mines):
             case _:
                 pass
         
-        moves = checkMoves(points, flags, moves, lastPlay)
+        moves = checkMoves(points, flags, moves, lastMove)
