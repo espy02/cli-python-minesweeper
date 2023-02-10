@@ -3,11 +3,9 @@ from functions import *
 def minesweeper(rows, columns, mines):
     '''
     The main function of the program.
-    It will keep looping until the user either wins the game or loses the game.
-    Check functions.py for a detailed explanation of each function.
+    Check functions.py for a detailed explanation of each function used in this module.
     '''
     cellsWithMines = minesCoordinates(rows, columns, mines)
-    
     cells = cellsCoordinates(rows, columns)
 
     points = 0
@@ -15,8 +13,8 @@ def minesweeper(rows, columns, mines):
     flags = mines
     moves = 0
     lastMove = [points, flags]
-
     selectedCells = []
+    
     playing = True
 
     while playing:
