@@ -1,5 +1,5 @@
-# python-minesweeper
-Python Minesweeper is a simple Minesweeper clone that can be played straight through the terminal, using Python 3.11.
+# cli-python-minesweeper
+CLI Python Minesweeper is a simple Minesweeper clone that can be played straight through the terminal, using Python 3.11.
 
 ## Usage
 Simply change your directory inside the terminal to a folder with the following files:
