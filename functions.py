@@ -3,8 +3,7 @@ def minesCoordinates(rows, columns, mines):
     This function will assign the coordinates of each mine.
     The number of rows, columns and mines have been defined in start.py.
     If the length of the list is greater than one, check for any duplicates.
-    If duplicate found, remove the one with the greatest index number (which is j).
-    checkForDuplicates is used because, if a duplicate is found, only two mines will have the same coordinates.
+    If a duplicate is found, remove the one with the greatest index number (which is j).
     This function will return a list with the coordinates of each mine.
     '''
     from random import randint
@@ -50,7 +49,7 @@ def cellsCoordinates(rows, columns):
 
 def showCells(points, totalPoints, flags, moves, cells, columns):
     '''
-    This function will print the cells dictionary, each element in one line.
+    This function will print the cells dictionary, each value in one line.
     The number of columns have been defined in start.py.
     points, totalPoints, flags, moves and cells have been defined in game.py.
 
@@ -125,7 +124,7 @@ def checkMinesAround(rowChosen, columnChosen, rows, columns, cellsWithMines):
     The number of rows and columns have been defined in start.py.
     rowChosen, columnChosen and cellsWithMines have been defined in game.py.
     The six if statements are used if, for example, the selected cell is [1,1].
-    The cells [0,0], [0,1], [0,2], [1,0], [2,0] can't be checked, because those cells don't exist.
+    The cells [1,0] and [0,1] can't be checked, because those cells don't exist.
     This function return the number of mines around the selected cell.
     '''
     minesAround = 0
