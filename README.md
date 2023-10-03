@@ -21,5 +21,3 @@ You can now begin playing. You can select a cell, or place a flag on a cell.
 - You can't select a cell with a flag, but you can remove a flag from a cell by using the `Flag` option again.
 - Once you select a cell that does not have a mine, all cells near the chosen cell that have the same number of mines around them will also be automatically selected.
 - You win when you select every cell that does not have a mine, and you lose if you select any cell with a mine.
-
-![img04](https://i.ibb.co/ggfwk64/img04.gif)
